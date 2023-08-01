@@ -2,6 +2,9 @@ import './App.css';
 import React from 'react';
 // import List from './components/List';
 import List from './List';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+
 
 class App extends React.Component {
   constructor(props) {
@@ -12,6 +15,10 @@ class App extends React.Component {
     }
   }
 
+  componentDidUpdate = () => {
+    console.log(this.state)
+  }
+
   handleInputValue = (event) => {
     this.setState({
       inputValue: event.target.value
@@ -19,7 +26,6 @@ class App extends React.Component {
   }
 
   submitTodo = (event) => {
-    console.log(event)
     let obj = {
       inputText: this.state.inputValue,
       isCompleted: false,
@@ -34,7 +40,6 @@ class App extends React.Component {
   }
 
   addTodoByKey = (event) => {
-    console.log(event)
     if (event.code === "Enter") {
       this.submitTodo()
     }
@@ -68,6 +73,7 @@ class App extends React.Component {
   }
 
   editTodo = (elm) => {
+    this.deleteTodo(elm)
     this.setState({
       inputValue: elm.inputText
     })
@@ -78,13 +84,15 @@ class App extends React.Component {
       <React.Fragment>
         <div className="App">
           <h1>todos</h1>
-          <input type='text'
+          <TextField type='text'
+            id="outlined-basic" label="Outlined" variant="outlined"
             value={this.state.inputValue}
             placeholder='What needs to be done?'
             onChange={this.handleInputValue}
             onKeyDown={this.addTodoByKey}
           />
-          <button onClick={this.submitTodo}>Submit</button>
+          <Button variant="contained" onClick={this.submitTodo}>Submit</Button>
+          {/* <Button variant="contained">Contained</Button> */}
         </div>
         <List inputValue={this.state.inputValue}
           allTodo={this.state.allTodo} deleteTodo={this.deleteTodo}  
