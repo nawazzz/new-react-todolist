@@ -83,20 +83,24 @@ class App extends React.Component {
     return (
       <React.Fragment>
         <div className="App">
-          <h1>todos</h1>
+          <h1 style={{fontSize: '80px', fontWeight: '600'}}>todos</h1>
           <TextField type='text'
-            id="outlined-basic" label="Outlined" variant="outlined"
+            id="outlined-basic" label="What needs to be done?" variant="outlined"
             value={this.state.inputValue}
             placeholder='What needs to be done?'
             onChange={this.handleInputValue}
             onKeyDown={this.addTodoByKey}
+            style={{width: '500px'}}
           />
-          <Button variant="contained" onClick={this.submitTodo}>Submit</Button>
-          {/* <Button variant="contained">Contained</Button> */}
+          <Button variant="contained" 
+                  onClick={this.submitTodo}
+                  style={{height: '55px'}}
+                  >Submit</Button>
         </div>
         <List inputValue={this.state.inputValue}
           allTodo={this.state.allTodo} deleteTodo={this.deleteTodo}  
           completeTodo={this.completeTodo} editTodo={this.editTodo}/>
+
       </React.Fragment>
     );
   }
